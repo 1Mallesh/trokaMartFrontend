@@ -22,6 +22,33 @@ export default function Navbar() {
 
   return (
     <nav className="bg-gray-800 shadow-md sticky top-0 z-50 overflow-x-clip relative">
+      {/* 🔥 TOP PROFILE BAR */}
+{isAuthenticated && (
+  <div className="bg-gray-900 text-white text-xs sm:text-sm px-4 sm:px-6 lg:px-8 py-1 flex justify-end items-center gap-3">
+
+    {/* USER NAME */}
+    <span className="hidden sm:block">
+      Hello, {user?.name || "User"}
+    </span>
+
+    {/* PROFILE ICON */}
+    <Link href="/profile" className="flex items-center gap-1 hover:text-green-300">
+      <div className="w-6 h-6 rounded-full bg-gray-600 flex items-center justify-center text-xs font-bold uppercase">
+        {user?.name?.charAt(0) || "U"}
+      </div>
+      <span className="hidden sm:block">Profile</span>
+    </Link>
+
+    {/* LOGOUT */}
+    <button
+      onClick={logout}
+      className="hover:text-red-400"
+    >
+      Logout
+    </button>
+
+  </div>
+)}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-14 sm:h-16 lg:h-[68px] gap-2">
           <div className="flex-shrink-0">
@@ -29,11 +56,10 @@ export default function Navbar() {
               <Image
                 src={logo}
                 alt="TrokaMart Logo"
-                width={360}
-                height={88}
+               
                 priority
                 
-                className=""
+                className="logo_width w-[141px] sm:w-[160px] md:w-[180px] lg:w-[200px] xl:w-[220px] h-auto object-contain"
               />
             </Link>
           </div>
@@ -79,6 +105,7 @@ export default function Navbar() {
                 <Link href="/register" className="text-white hover:text-green-200">Register</Link>
               </div>
             )}
+    
 
             <Link href="/cart" className="relative">
               <svg className="w-6 h-6 text-white hover:text-green-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -88,9 +115,54 @@ export default function Navbar() {
                 <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">{cartCount}</span>
               )}
             </Link>
+                    {true && (
+  <div className="relative group cursor-pointer">
+    <Link href="/profile" className="flex items-center text-white hover:text-green-200">
+      
+      {/* PROFILE ICON */}
+      <div className="w-8 h-8 rounded-full bg-gray-600 flex items-center justify-center text-sm font-bold uppercase">
+        {user?.name?.charAt(0) || "U"}
+      </div>
+
+    </Link>
+
+    {/* DROPDOWN (OPTIONAL - LIKE AMAZON) */}
+    <div className="absolute right-0 mt-2 w-52 bg-white rounded-md shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+      
+      <div className="px-4 py-2 border-b text-sm text-gray-700">
+        <p className="font-semibold">{user?.name}</p>
+        <p className="text-xs text-gray-500">{user?.email}</p>
+      </div>
+
+      <Link href="/profile" className="block px-4 py-2 text-sm hover:bg-gray-100">
+        My Profile
+      </Link>
+
+      <Link href="/orders" className="block px-4 py-2 text-sm hover:bg-gray-100">
+        My Orders
+      </Link>
+
+      <button
+        onClick={logout}
+        className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+      >
+        Logout
+      </button>
+
+    </div>
+  </div>
+)}
           </div>
+     
 
           <div className="lg:hidden flex items-center space-x-2 sm:space-x-3">
+                 {true && (
+  <Link href="/profile" className="text-white p-1.5">
+    <div className="w-7 h-7 rounded-full bg-gray-600 flex items-center justify-center text-xs font-bold uppercase">
+      {user?.name?.charAt(0) || "U"}
+    </div>
+  </Link>
+)}
             <button
               onClick={() => {
                 setIsSearchOpen(!isSearchOpen);
@@ -162,32 +234,42 @@ export default function Navbar() {
         )}
       </div>
 
-      {isSearchOpen && (
-        <div className="absolute left-4 right-4 sm:left-6 sm:right-6 lg:left-8 lg:right-8 top-2 sm:top-3 lg:top-3 z-30">
-          <div className="flex items-center bg-white rounded-lg overflow-hidden shadow-lg border border-gray-200">
-            <input
-              type="text"
-              placeholder="Search products..."
-              autoFocus
-              className="flex-1 min-w-0 px-3 sm:px-4 py-2.5 text-sm border-0 focus:outline-none focus:ring-0 placeholder-gray-500"
-            />
-            <button className="px-3 sm:px-4 py-2.5 bg-green-600 text-white hover:bg-green-700 transition-colors">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </button>
-            <button
-              onClick={() => setIsSearchOpen(false)}
-              className="px-2.5 sm:px-3 py-2.5 text-gray-600 hover:text-gray-800 hover:bg-gray-100 transition-colors"
-              title="Close Search"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
-        </div>
-      )}
+    {isSearchOpen && (
+  <div className="w-full bg-gray-800 border-t border-gray-600 px-4 sm:px-6 lg:px-8 py-3 transition-all duration-500 ease-in-out animate-slideDown">
+
+    <div className="max-w-4xl mx-auto flex items-center bg-white rounded-full shadow-md overflow-hidden">
+
+      {/* SEARCH ICON */}
+      <div className="pl-4 text-gray-400">
+        🔍
+      </div>
+
+      {/* INPUT */}
+      <input
+        type="text"
+        placeholder="Search for products, brands and more..."
+        autoFocus
+        className="w-full px-3 py-2 text-sm text-gray-700 placeholder-gray-400 outline-none"
+      />
+
+      {/* BUTTON */}
+      <button className="bg-green-600 hover:bg-green-700 text-white px-5 py-2 text-sm font-medium transition-all">
+        Search
+      </button>
+
+    </div>
+
+    {/* SUGGESTIONS (LIKE AMAZON) */}
+    <div className="max-w-4xl mx-auto mt-2 text-xs text-gray-300 flex flex-wrap gap-3">
+      <span className="hover:text-white cursor-pointer">iPhone</span>
+      <span className="hover:text-white cursor-pointer">Shoes</span>
+      <span className="hover:text-white cursor-pointer">Laptops</span>
+      <span className="hover:text-white cursor-pointer">Headphones</span>
+      <span className="hover:text-white cursor-pointer">Watches</span>
+    </div>
+
+  </div>
+)}
 
       <LoginModal isOpen={isLoginModalOpen} onClose={() => setIsLoginModalOpen(false)} />
     </nav>

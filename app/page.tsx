@@ -71,7 +71,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight">
-              Welcome to <span className="text-green-200">TrokaMart</span>
+              Welcome to <span className="text-green-200">TokoMart</span>
             </h1>
             <p className="text-base sm:text-xl lg:text-2xl mb-6 sm:mb-8 text-green-100 max-w-3xl mx-auto">
               Your ultimate shopping destination for fresh produce, quality products, and amazing deals
