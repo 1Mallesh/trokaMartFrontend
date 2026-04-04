@@ -355,7 +355,7 @@ export default function CategoryPage() {
     setProducts(filteredProducts);
     setLoading(false);
     fetchLocationData();
-  }, [category, currentCategory, router]);
+  }, [category]);
 
   const calculatePrice = (basePrice: number) => {
     if (!locationData) return { price: basePrice, currency: 'INR' };
