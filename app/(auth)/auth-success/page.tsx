@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useAuthStore } from "@/store/authStore";
 
-export default function AuthSuccessPage() {
+function AuthSuccessContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { setGoogleAuth } = useAuthStore();
@@ -14,16 +14,13 @@ export default function AuthSuccessPage() {
   useEffect(() => {
     const handleOAuthSuccess = async () => {
       try {
-        // Get user data from query params or localStorage
         const userDataParam = searchParams.get("user_data");
         const tokenParam = searchParams.get("token");
 
         if (tokenParam) {
-          // Backend sent token in query param
           localStorage.setItem("token", tokenParam);
         }
 
-        // Get user from localStorage or API
         const storedUser = localStorage.getItem("user");
         const user = storedUser ? JSON.parse(storedUser) : null;
 
@@ -33,10 +30,8 @@ export default function AuthSuccessPage() {
           return;
         }
 
-        // Update auth store
         setGoogleAuth(user, localStorage.getItem("token") || "");
 
-        // Role-based redirect
         const role = user.role?.toLowerCase() || "user";
 
         if (role === "admin") {
@@ -58,43 +53,25 @@ export default function AuthSuccessPage() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-green-50 to-green-100 flex items-center justify-center py-8 sm:py-12 px-4">
-        <div className="max-w-md w-full">
-          <div className="bg-white rounded-xl shadow-2xl p-5 sm:p-8 text-center">
-            <div className="mb-4">
-              <svg className="mx-auto h-16 w-16 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4v.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Authentication Failed</h1>
-            <p className="text-gray-600 mb-6">{error}</p>
-            <button
-              onClick={() => router.push("/login")}
-              className="w-full bg-green-600 text-white py-3 rounded-lg font-medium hover:bg-green-700 transition"
-            >
-              Back to Login
-            </button>
-          </div>
+      <div className="min-h-screen flex items-center justify-center">
+        <div>
+          <h1>Authentication Failed</h1>
+          <p>{error}</p>
+          <button onClick={() => router.push("/login")}>
+            Back to Login
+          </button>
         </div>
       </div>
     );
   }
 
+  return <div>Loading... Redirecting...</div>;
+}
+
+export default function AuthSuccessPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-green-100 flex items-center justify-center py-8 sm:py-12 px-4">
-      <div className="max-w-md w-full">
-        <div className="bg-white rounded-xl shadow-2xl p-5 sm:p-8 text-center">
-          <div className="mb-4">
-            <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-green-100">
-              <svg className="h-8 w-8 text-green-600 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
-            </div>
-          </div>
-          <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Completing Sign-In</h1>
-          <p className="text-gray-600">Redirecting you to your dashboard...</p>
-        </div>
-      </div>
-    </div>
+    <Suspense fallback={<div>Loading page...</div>}>
+      <AuthSuccessContent />
+    </Suspense>
   );
 }
