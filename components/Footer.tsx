@@ -69,7 +69,7 @@ export default function Footer() {
 
         <div className="border-t border-gray-700 mt-8 pt-6 sm:pt-8 text-center">
           <p className="text-gray-300">
-            &copy; 2024 TrokaMart. All rights reserved. | Made with care for better shopping
+            &copy; 2027 TrokaMart. All rights reserved. | Made with care for better shopping created by Mallesh
           </p>
         </div>
       </div>
