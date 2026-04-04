@@ -1,25 +1,31 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
+import logo from "@/app/(public)/assets/imges/logo3.png";
+
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-800 text-white py-8">
+    <footer className="bg-gray-800 text-white py-8 sm:py-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
-          <div className="col-span-1 md:col-span-2">
+          <div className="col-span-1 sm:col-span-2">
             <div className="flex items-center mb-4">
-              <svg className="w-8 h-8 mr-2 text-green-400" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-              </svg>
-              <span className="text-2xl font-bold">TrokaMart</span>
+               <Image
+        src={logo}
+        alt="Picture of the author"
+        width={300}
+        height={100}
+        className=" "
+      />
             </div>
             <p className="text-gray-300 mb-4">
               Your ultimate shopping destination for fresh produce, electronics, fashion, and more.
               Shop with confidence and enjoy fast, reliable delivery.
             </p>
-            <div className="flex space-x-4">
+            <div className="flex flex-wrap gap-4">
               <a href="#" className="text-gray-300 hover:text-green-400">
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
@@ -61,12 +67,13 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-gray-700 mt-8 pt-8 text-center">
+        <div className="border-t border-gray-700 mt-8 pt-6 sm:pt-8 text-center">
           <p className="text-gray-300">
-            &copy; 2024 TrokaMart. All rights reserved. | Made with ❤️ for better shopping
+            &copy; 2024 TrokaMart. All rights reserved. | Made with care for better shopping
           </p>
         </div>
       </div>
     </footer>
   );
 }
+

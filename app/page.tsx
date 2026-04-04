@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useCartStore } from "@/store/cartStore";
 
 export default function Home() {
@@ -68,13 +67,13 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-green-600 to-green-700 text-white py-20">
+      <section className="bg-gradient-to-r from-green-600 to-green-700 text-white py-14 sm:py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
+            <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight">
               Welcome to <span className="text-green-200">TrokaMart</span>
             </h1>
-            <p className="text-xl md:text-2xl mb-8 text-green-100">
+            <p className="text-base sm:text-xl lg:text-2xl mb-6 sm:mb-8 text-green-100 max-w-3xl mx-auto">
               Your ultimate shopping destination for fresh produce, quality products, and amazing deals
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -96,15 +95,15 @@ export default function Home() {
       </section>
 
       {/* Categories Section */}
-      <section className="py-16 bg-white">
+      <section className="py-12 sm:py-14 lg:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">Shop by Category</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12 text-gray-800">Shop by Category</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3 sm:gap-6">
             {categories.map((category) => (
               <Link
                 key={category.name}
                 href={category.href}
-                className="flex flex-col items-center p-6 bg-gray-50 rounded-lg hover:bg-green-50 hover:shadow-md transition-all duration-200 group"
+                className="flex flex-col items-center p-4 sm:p-6 bg-gray-50 rounded-lg hover:bg-green-50 hover:shadow-md transition-all duration-200 group"
               >
                 <div className="text-4xl mb-3 group-hover:scale-110 transition-transform">
                   {category.icon}
@@ -119,16 +118,16 @@ export default function Home() {
       </section>
 
       {/* Featured Products */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-12 sm:py-14 lg:py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">Featured Products</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12 text-gray-800">Featured Products</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-6">
             {featuredProducts.map((product) => (
               <div
                 key={product.id}
-                className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+                className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow flex flex-col h-full"
               >
-                <div className="relative h-48 bg-gray-200 flex items-center justify-center">
+                <div className="relative h-44 sm:h-48 bg-gray-200 flex items-center justify-center">
                   <span className="text-4xl">
                     {product.name.includes('Tomatoes') ? '🍅' :
                      product.name.includes('Rice') ? '🌾' :
@@ -141,12 +140,12 @@ export default function Home() {
                     </div>
                   )}
                 </div>
-                <div className="p-4">
-                  <h3 className="font-semibold text-lg mb-2 text-gray-800">{product.name}</h3>
-                  <p className="text-sm text-gray-600 mb-1">{product.seller} • {product.location}</p>
+                <div className="p-4 flex flex-col flex-1">
+                  <h3 className="font-semibold text-base sm:text-lg mb-2 text-gray-800 line-clamp-2 min-h-[3rem]">{product.name}</h3>
+                  <p className="text-sm text-gray-600 mb-1 line-clamp-1">{product.seller} • {product.location}</p>
                   <p className="text-xs text-green-600 mb-2">{product.quantity} • {product.quality}</p>
-                  <p className="text-xs text-gray-500 mb-3 italic">"{product.farmerStory}"</p>
-                  <div className="flex items-center gap-2 mb-3">
+                  <p className="text-xs text-gray-500 mb-4 italic line-clamp-2">"{product.farmerStory}"</p>
+                  <div className="flex items-center gap-2 mb-4 mt-auto">
                     <span className="text-2xl font-bold text-green-600">₹{product.price}</span>
                     {product.originalPrice && (
                       <span className="text-sm text-gray-500 line-through">₹{product.originalPrice}</span>
@@ -166,7 +165,7 @@ export default function Home() {
                         currency: "INR",
                       })
                     }
-                    className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-colors"
+                    className="w-full bg-green-600 text-white py-2.5 rounded-lg hover:bg-green-700 transition-colors"
                   >
                     Add to Cart
                   </button>
@@ -186,10 +185,10 @@ export default function Home() {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-16 bg-white">
+      <section className="py-12 sm:py-14 lg:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">Why Choose TrokaMart?</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12 text-gray-800">Why Choose TrokaMart?</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             <div className="text-center">
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-3xl">🚚</span>
@@ -216,10 +215,10 @@ export default function Home() {
       </section>
 
       {/* Call to Action */}
-      <section className="py-16 bg-green-600 text-white">
+      <section className="py-12 sm:py-14 lg:py-16 bg-green-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready to Start Shopping?</h2>
-          <p className="text-xl mb-8 text-green-100">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-4">Ready to Start Shopping?</h2>
+          <p className="text-base sm:text-xl mb-8 text-green-100">
             Join thousands of satisfied customers on TrokaMart
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -241,3 +240,4 @@ export default function Home() {
     </div>
   );
 }
+

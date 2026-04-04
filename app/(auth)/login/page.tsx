@@ -61,15 +61,15 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-green-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <div className="bg-white rounded-xl shadow-2xl p-8">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-green-100 flex items-center justify-center py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-6 sm:space-y-8">
+        <div className="bg-white rounded-xl shadow-2xl p-5 sm:p-8">
           {/* Logo/Brand */}
           <div className="text-center mb-8">
             <div className="mx-auto h-16 w-16 bg-green-600 rounded-full flex items-center justify-center mb-4">
               <span className="text-2xl text-white font-bold">TM</span>
             </div>
-            <h2 className="text-3xl font-bold text-gray-900">Welcome to TrokaMart</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Welcome to TrokaMart</h2>
             <p className="mt-2 text-sm text-gray-600">Sign in to your account</p>
           </div>
 

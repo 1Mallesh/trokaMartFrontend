@@ -609,7 +609,7 @@ export default function ProductDetailPage() {
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8 page-content">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-12">
           {/* Product Images - Mobile Optimized */}
-          <div className="space-y-4">
+          <div className="space-y-4 lg:sticky lg:top-24 lg:self-start">
             <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden product-image sm:aspect-auto sm:h-auto">
               <div className="w-full h-full flex items-center justify-center">
                 <span className="text-6xl sm:text-8xl">
@@ -671,7 +671,7 @@ export default function ProductDetailPage() {
             </div>
 
             {/* Product Details - Mobile Optimized */}
-            <div className="grid grid-cols-2 sm:grid-cols-1 gap-2 sm:gap-3 text-sm">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2 sm:gap-3 text-sm">
               <div className="flex justify-between">
                 <span className="text-gray-600">Seller:</span>
                 <span className="font-medium">{product.seller}</span>

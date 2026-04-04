@@ -68,9 +68,9 @@ export default function GoogleCallbackPage() {
   }, [searchParams, router]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-green-100 flex items-center justify-center py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-green-100 flex items-center justify-center py-8 sm:py-12 px-4">
       <div className="max-w-md w-full">
-        <div className="bg-white rounded-xl shadow-2xl p-8 text-center">
+        <div className="bg-white rounded-xl shadow-2xl p-5 sm:p-8 text-center">
           <div className="mb-4">
             <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-green-100">
               <svg className="h-8 w-8 text-green-600 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -78,7 +78,7 @@ export default function GoogleCallbackPage() {
               </svg>
             </div>
           </div>
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Redirecting to Google for secure sign-in</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Redirecting to Google for secure sign-in</h1>
           <p className="text-gray-600">Please wait...</p>
         </div>
       </div>

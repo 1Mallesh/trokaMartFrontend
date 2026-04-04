@@ -202,17 +202,17 @@ export default function CheckoutPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         <div className="mb-6">
-          <h1 className="text-3xl font-bold text-gray-900">Global Checkout</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Global Checkout</h1>
           <p className="text-gray-600 mt-2">🌍 Delivering to {userLocation.country} • Currency: {userLocation.currency}</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Shipping & Payment */}
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             {/* Location Selector */}
-            <div className="bg-white rounded-lg shadow-md p-6">
+            <div className="bg-white rounded-lg shadow-md p-5 sm:p-6">
               <h2 className="text-xl font-semibold text-gray-900 mb-4">📍 Delivery Location</h2>
               <select
                 value={shippingAddress.country}
@@ -228,7 +228,7 @@ export default function CheckoutPage() {
             </div>
 
             {/* Shipping Address */}
-            <div className="bg-white rounded-lg shadow-md p-6">
+            <div className="bg-white rounded-lg shadow-md p-5 sm:p-6">
               <h2 className="text-xl font-semibold text-gray-900 mb-4">Shipping Address</h2>
               <div className="grid grid-cols-1 gap-4">
                 <div>
@@ -255,7 +255,7 @@ export default function CheckoutPage() {
                     required
                   />
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
                       City
@@ -281,7 +281,7 @@ export default function CheckoutPage() {
                     />
                   </div>
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
                       Postal Code
@@ -311,7 +311,7 @@ export default function CheckoutPage() {
             </div>
 
             {/* Payment */}
-            <div className="bg-white rounded-lg shadow-md p-6">
+            <div className="bg-white rounded-lg shadow-md p-5 sm:p-6">
               <h2 className="text-xl font-semibold text-gray-900 mb-4">💳 Secure Payment</h2>
               <Elements stripe={stripePromise}>
                 <CheckoutForm
@@ -325,14 +325,14 @@ export default function CheckoutPage() {
 
           {/* Order Summary */}
           <div className="lg:sticky lg:top-4">
-            <div className="bg-white rounded-lg shadow-md p-6">
+            <div className="bg-white rounded-lg shadow-md p-5 sm:p-6">
               <h2 className="text-xl font-semibold text-gray-900 mb-4">🧾 Order Summary</h2>
 
               <div className="space-y-3 mb-4">
                 {cartItems.map((item) => (
-                  <div key={item.id} className="flex justify-between">
-                    <span>{item.name} x{item.quantity}</span>
-                    <span>{userLocation.symbol}{convertPrice(item.price * item.quantity).toFixed(2)}</span>
+                  <div key={item.id} className="flex justify-between gap-3 text-sm">
+                    <span className="min-w-0">{item.name} x{item.quantity}</span>
+                    <span className="whitespace-nowrap">{userLocation.symbol}{convertPrice(item.price * item.quantity).toFixed(2)}</span>
                   </div>
                 ))}
                 <div className="border-t pt-3 space-y-2">

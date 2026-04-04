@@ -52,23 +52,23 @@ export default function CartPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Shopping Cart</h1>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8">Shopping Cart</h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Cart Items */}
           <div className="lg:col-span-2">
             <div className="bg-white rounded-lg shadow-md">
               {items.map((item) => (
-                <div key={item.id} className="p-6 border-b border-gray-200 last:border-b-0">
-                  <div className="flex items-center gap-4">
-                    <div className="w-20 h-20 bg-gray-200 rounded-lg flex items-center justify-center">
+                <div key={item.id} className="p-4 sm:p-6 border-b border-gray-200 last:border-b-0">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gray-200 rounded-lg flex items-center justify-center">
                       <span className="text-2xl">
                         {item.name.includes('Tomatoes') ? '🍅' : '🎧'}
                       </span>
                     </div>
-                    <div className="flex-1">
-                      <h3 className="font-semibold text-lg text-gray-900">{item.name}</h3>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-semibold text-base sm:text-lg text-gray-900 line-clamp-2">{item.name}</h3>
                       <p className="text-gray-600">{item.seller}</p>
                       <p className="text-green-600 font-semibold">₹{item.price}</p>
                     </div>
@@ -87,7 +87,7 @@ export default function CartPage() {
                         +
                       </button>
                     </div>
-                    <div className="text-right">
+                    <div className="text-left sm:text-right">
                       <p className="font-semibold text-lg">₹{item.price * item.quantity}</p>
                       <button
                         onClick={() => handleRemoveItem(item.id)}
@@ -104,7 +104,7 @@ export default function CartPage() {
 
           {/* Order Summary */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow-md p-6 sticky top-4">
+            <div className="bg-white rounded-lg shadow-md p-5 sm:p-6 sticky top-4">
               <h2 className="text-xl font-semibold text-gray-900 mb-4">Order Summary</h2>
 
               <div className="space-y-3 mb-4">

@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { useCartStore } from "@/store/cartStore";
 
 interface Product {
@@ -144,62 +143,88 @@ export default function ProductsPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">All Products</h1>
+      <div className="bg-white shadow-sm border-b border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-6">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">All Products</h1>
 
           {/* Filters */}
-          <div className="flex flex-col md:flex-row gap-4">
-            <div className="flex-1">
-              <input
-                type="text"
-                placeholder="Search products..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-              />
+          <div className="space-y-4 rounded-2xl border border-gray-200 bg-gray-50/70 p-3 sm:p-4">
+            <div className="flex flex-col md:flex-row gap-3">
+              <div className="flex-1">
+                <input
+                  type="text"
+                  placeholder="Search products..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl bg-white focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                />
+              </div>
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto">
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                  className="w-full sm:w-auto sm:min-w-[180px] px-4 py-3 border border-gray-300 rounded-xl bg-white focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                >
+                  <option value="newest">Newest First</option>
+                  <option value="price-low">Price: Low to High</option>
+                  <option value="price-high">Price: High to Low</option>
+                </select>
+                {(searchTerm || selectedCategory) && (
+                  <button
+                    onClick={() => {
+                      setSearchTerm("");
+                      setSelectedCategory("");
+                    }}
+                    className="w-full sm:w-auto px-4 py-3 rounded-xl border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors whitespace-nowrap"
+                  >
+                    Clear
+                  </button>
+                )}
+              </div>
             </div>
-            <div className="flex gap-4">
-              <select
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-              >
-                {categories.map(category => (
-                  <option key={category.value} value={category.value}>
+
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-3">
+              <p className="text-sm text-gray-600">Filter by category</p>
+              <p className="text-sm text-gray-500">{sortedProducts.length} items</p>
+            </div>
+
+            <div className="flex gap-2 overflow-x-auto md:overflow-visible md:flex-wrap pb-1 -mx-1 px-1 md:mx-0 md:px-0">
+              {categories.map((category) => {
+                const isActive = selectedCategory === category.value;
+                return (
+                  <button
+                    key={category.value || "all"}
+                    onClick={() => setSelectedCategory(category.value)}
+                    className={`px-4 py-2.5 rounded-full text-sm font-medium whitespace-nowrap border transition-colors ${
+                      isActive
+                        ? "bg-green-600 text-white border-green-600"
+                        : "bg-white text-gray-700 border-gray-300 hover:border-green-400 hover:text-green-700"
+                    }`}
+                  >
                     {category.label}
-                  </option>
-                ))}
-              </select>
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-              >
-                <option value="newest">Newest First</option>
-                <option value="price-low">Price: Low to High</option>
-                <option value="price-high">Price: High to Low</option>
-              </select>
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>
       </div>
 
       {/* Products Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         {sortedProducts.length === 0 ? (
           <div className="text-center py-12">
             <p className="text-gray-500 text-lg">No products found matching your criteria.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
             {sortedProducts.map((product) => (
               <div
                 key={product.id}
-                className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+                className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow flex flex-col h-full"
               >
                 <Link href={`/product/${product.id}`}>
-                  <div className="relative h-48 bg-gray-200 flex items-center justify-center cursor-pointer">
+                  <div className="relative h-44 sm:h-48 bg-gray-200 flex items-center justify-center cursor-pointer">
                     <span className="text-4xl">
                       {product.category === 'vegetables' ? '🥕' :
                        product.category === 'electronics' ? '📱' :
@@ -213,23 +238,24 @@ export default function ProductsPage() {
                     )}
                   </div>
                 </Link>
-                <div className="p-4">
+                <div className="p-4 flex flex-col flex-1">
                   <Link href={`/product/${product.id}`}>
-                    <h3 className="font-semibold text-lg mb-2 text-gray-800 hover:text-green-600 cursor-pointer">
+                    <h3 className="font-semibold text-base sm:text-lg mb-2 text-gray-800 hover:text-green-600 cursor-pointer line-clamp-2 min-h-[3rem]">
                       {product.name}
                     </h3>
                   </Link>
-                  <p className="text-sm text-gray-600 mb-2">{product.seller} • {product.location}</p>
-                  <p className="text-sm text-gray-500 mb-2">{product.quantity} • {product.quality}</p>
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="text-2xl font-bold text-green-600">₹{product.price}</span>
+                  <p className="text-sm text-gray-600 mb-2 line-clamp-1">{product.seller} | {product.location}</p>
+                  <p className="text-sm text-gray-500 mb-3">{product.quantity} | {product.quality}</p>
+                  <p className="text-sm text-gray-500 mb-4 line-clamp-2">{product.description}</p>
+                  <div className="flex items-center gap-2 mb-4 mt-auto">
+                    <span className="text-2xl font-bold text-green-600">Rs {product.price}</span>
                     {product.originalPrice && (
-                      <span className="text-sm text-gray-500 line-through">₹{product.originalPrice}</span>
+                      <span className="text-sm text-gray-500 line-through">Rs {product.originalPrice}</span>
                     )}
                   </div>
                   <button
                     onClick={() => handleAddToCart(product)}
-                    className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-colors"
+                    className="w-full bg-green-600 text-white py-2.5 rounded-lg hover:bg-green-700 transition-colors"
                   >
                     Add to Cart
                   </button>
@@ -242,3 +268,5 @@ export default function ProductsPage() {
     </div>
   );
 }
+
+

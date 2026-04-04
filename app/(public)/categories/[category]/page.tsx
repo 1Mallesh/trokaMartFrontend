@@ -415,17 +415,17 @@ export default function CategoryPage() {
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <div className={`bg-gradient-to-r from-${currentCategory.color}-600 to-${currentCategory.color}-700 text-white`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="flex items-center mb-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+          <div className="flex items-center mb-3 sm:mb-4">
             <Link href="/categories" className="text-white hover:text-gray-200 mr-4">
               ← Back to Categories
             </Link>
           </div>
-          <div className="flex items-center">
-            <span className="text-6xl mr-6">{currentCategory.icon}</span>
+          <div className="flex items-start sm:items-center gap-4 sm:gap-6">
+            <span className="text-4xl sm:text-6xl">{currentCategory.icon}</span>
             <div>
-              <h1 className="text-4xl font-bold mb-2">{currentCategory.name}</h1>
-              <p className="text-xl text-gray-100">{currentCategory.description}</p>
+              <h1 className="text-2xl sm:text-4xl font-bold mb-2">{currentCategory.name}</h1>
+              <p className="text-base sm:text-xl text-gray-100">{currentCategory.description}</p>
               <p className="text-sm text-gray-200 mt-2">{sortedProducts.length} products available</p>
             </div>
           </div>
@@ -435,21 +435,21 @@ export default function CategoryPage() {
       {/* Filters */}
       <div className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex flex-col md:flex-row gap-4">
+          <div className="flex flex-col md:flex-row gap-3">
             <div className="flex-1">
               <input
                 type="text"
                 placeholder={`Search ${currentCategory.name.toLowerCase()}...`}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent"
               />
             </div>
-            <div className="flex gap-4">
+            <div className="w-full md:w-auto">
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                className="w-full md:w-auto px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent"
               >
                 <option value="newest">Newest First</option>
                 <option value="price-low">Price: Low to High</option>
@@ -462,7 +462,7 @@ export default function CategoryPage() {
       </div>
 
       {/* Products Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         {sortedProducts.length === 0 ? (
           <div className="text-center py-12">
             <p className="text-gray-500 text-lg">No products found in this category.</p>
@@ -471,7 +471,7 @@ export default function CategoryPage() {
             </Link>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
             {sortedProducts.map((product) => {
               const pricing = calculatePrice(product.basePrice);
               const originalPricing = product.originalPrice ? calculatePrice(product.originalPrice) : null;
@@ -479,10 +479,10 @@ export default function CategoryPage() {
               return (
                 <div
                   key={product.id}
-                  className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+                  className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow flex flex-col h-full"
                 >
                   <Link href={`/product/${product.id}`}>
-                    <div className="relative h-48 bg-gray-200 flex items-center justify-center cursor-pointer">
+                    <div className="relative h-44 sm:h-48 bg-gray-200 flex items-center justify-center cursor-pointer">
                       <span className="text-4xl">
                         {product.category === 'vegetables' ? '🥕' :
                          product.category === 'farming' ? '🌾' :
@@ -499,9 +499,9 @@ export default function CategoryPage() {
                       )}
                     </div>
                   </Link>
-                  <div className="p-4">
+                  <div className="p-4 flex flex-col flex-1">
                     <Link href={`/product/${product.id}`}>
-                      <h3 className="font-semibold text-lg mb-2 text-gray-800 hover:text-green-600 cursor-pointer line-clamp-2">
+                      <h3 className="font-semibold text-base sm:text-lg mb-2 text-gray-800 hover:text-green-600 cursor-pointer line-clamp-2 min-h-[3rem]">
                         {product.name}
                       </h3>
                     </Link>
@@ -512,7 +512,7 @@ export default function CategoryPage() {
                       <span className="text-yellow-400 text-sm">⭐</span>
                       <span className="text-xs text-gray-600 ml-1">{product.rating} ({product.reviews})</span>
                     </div>
-                    <div className="flex items-center gap-2 mb-3">
+                    <div className="flex items-center gap-2 mb-4 mt-auto">
                       <span className="text-2xl font-bold text-green-600">
                         {locationData?.currency === 'INR' ? '₹' :
                          locationData?.currency === 'USD' ? '$' :
@@ -534,7 +534,7 @@ export default function CategoryPage() {
                     </div>
                     <button
                       onClick={() => handleAddToCart(product)}
-                      className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition-colors text-sm"
+                      className="w-full bg-green-600 text-white py-2.5 rounded-lg hover:bg-green-700 transition-colors text-sm"
                     >
                       Add to Cart
                     </button>
@@ -547,10 +547,10 @@ export default function CategoryPage() {
       </div>
 
       {/* Related Categories */}
-      <div className="bg-white py-12">
+      <div className="bg-white py-10 sm:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-bold text-center mb-8 text-gray-800">Explore Other Categories</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+          <h2 className="text-xl sm:text-2xl font-bold text-center mb-8 text-gray-800">Explore Other Categories</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
             {Object.entries(categoryInfo)
               .filter(([key]) => key !== category)
               .slice(0, 6)

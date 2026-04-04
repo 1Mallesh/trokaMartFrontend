@@ -6,7 +6,8 @@ import { useAuth } from "@/hooks/useAuth";
 import { useRole } from "@/hooks/useRole";
 import { useCartStore } from "@/store/cartStore";
 import LoginModal from "./LoginModal";
-
+import Image from "next/image";
+import logo from "@/app/(public)/assets/imges/logo3.png";
 export default function Navbar() {
   const { user, logout, isAuthenticated } = useAuth();
   const { isAdmin, isSeller } = useRole();
@@ -18,21 +19,26 @@ export default function Navbar() {
   const cartCount = getItemCount();
 
   return (
-    <nav className="bg-green-600 shadow-md sticky top-0 z-50">
+    <nav className="bg-gray-800 shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-14 sm:h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center text-white text-2xl font-bold hover:text-green-200">
-              <svg className="w-8 h-8 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-              </svg>
-              TrokaMart
+            <Link href="/" className="flex items-center gap-2 text-white font-bold hover:text-green-200">
+              <Image
+                src={logo}
+                alt="TrokaMart Logo"
+                width={300}
+                height={66}
+                priority
+                className=""
+              />
+              {/* <span className="text-lg sm:text-2xl leading-none">TrokaMart</span> */}
             </Link>
           </div>
 
-          {/* Search Bar - Hidden on mobile */}
-          <div className="hidden md:flex flex-1 max-w-2xl mx-6">
+          {/* Search Bar - Hidden on mobile/tablet */}
+          <div className="hidden lg:flex flex-1 max-w-2xl mx-6">
             <div className="w-full flex bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
               {/* Category Filter */}
               <select className="px-4 py-2.5 text-sm bg-gray-50 border-r border-gray-200 text-gray-700 focus:outline-none cursor-pointer hover:bg-gray-100">
@@ -64,7 +70,7 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden lg:flex items-center space-x-4">
             <Link href="/products" className="text-white hover:text-green-200">
               Products
             </Link>
@@ -138,10 +144,13 @@ export default function Navbar() {
           </div>
 
           {/* Mobile menu button and cart */}
-          <div className="md:hidden flex items-center space-x-3">
+          <div className="lg:hidden flex items-center space-x-2 sm:space-x-3">
             {/* Mobile Search Toggle */}
             <button
-              onClick={() => setIsMobileSearchOpen(!isMobileSearchOpen)}
+              onClick={() => {
+                setIsMobileSearchOpen(!isMobileSearchOpen);
+                setIsMenuOpen(false);
+              }}
               className="text-white hover:text-green-200 focus:outline-none p-1.5"
               title="Search"
             >
@@ -164,7 +173,10 @@ export default function Navbar() {
 
             {/* Menu button */}
             <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              onClick={() => {
+                setIsMenuOpen(!isMenuOpen);
+                setIsMobileSearchOpen(false);
+              }}
               className="text-white hover:text-green-200 focus:outline-none p-1.5"
               title="Menu"
             >
@@ -181,7 +193,7 @@ export default function Navbar() {
 
         {/* Mobile Search Bar - Toggle Expand (Industry Standard) */}
         {isMobileSearchOpen && (
-          <div className="md:hidden px-3 py-3 bg-green-700 border-t border-green-500 animate-in fade-in slide-in-from-top-2 duration-200">
+          <div className="lg:hidden px-3 py-3 bg-green-700 border-t border-green-500">
             <div className="flex gap-2">
               <input
                 type="text"
@@ -200,33 +212,33 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden border-t border-green-500 py-4">
+          <div className="lg:hidden border-t border-green-500 py-4">
             <div className="flex flex-col space-y-2">
-              <Link href="/products" className="text-white hover:text-green-200 py-2">
+              <Link href="/products" onClick={() => setIsMenuOpen(false)} className="text-white hover:text-green-200 py-2">
                 Products
               </Link>
-              <Link href="/categories" className="text-white hover:text-green-200 py-2">
+              <Link href="/categories" onClick={() => setIsMenuOpen(false)} className="text-white hover:text-green-200 py-2">
                 Categories
               </Link>
 
               {isAuthenticated ? (
                 <>
-                  <Link href="/dashboard" className="text-white hover:text-green-200 py-2">
+                  <Link href="/dashboard" onClick={() => setIsMenuOpen(false)} className="text-white hover:text-green-200 py-2">
                     Your Account
                   </Link>
-                  <Link href="/forgot-password" className="text-white hover:text-green-200 py-2">
+                  <Link href="/forgot-password" onClick={() => setIsMenuOpen(false)} className="text-white hover:text-green-200 py-2">
                     Reset Password
                   </Link>
-                  <Link href="/orders" className="text-white hover:text-green-200 py-2">
+                  <Link href="/orders" onClick={() => setIsMenuOpen(false)} className="text-white hover:text-green-200 py-2">
                     Your Orders
                   </Link>
                   {isSeller && (
-                    <Link href="/dashboard/listings" className="text-white hover:text-green-200 py-2">
+                    <Link href="/dashboard/listings" onClick={() => setIsMenuOpen(false)} className="text-white hover:text-green-200 py-2">
                       Your Listings
                     </Link>
                   )}
                   {isAdmin && (
-                    <Link href="/admin/dashboard" className="text-white hover:text-green-200 py-2">
+                    <Link href="/admin/dashboard" onClick={() => setIsMenuOpen(false)} className="text-white hover:text-green-200 py-2">
                       Admin Panel
                     </Link>
                   )}
@@ -245,7 +257,7 @@ export default function Navbar() {
                   >
                     Sign In
                   </button>
-                  <Link href="/register" className="text-white hover:text-green-200">
+                  <Link href="/register" onClick={() => setIsMenuOpen(false)} className="text-white hover:text-green-200">
                     Register
                   </Link>
                 </div>
