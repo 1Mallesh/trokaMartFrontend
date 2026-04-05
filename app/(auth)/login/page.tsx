@@ -65,7 +65,7 @@ export default function LoginPage() {
   };
 
   return (
-      <Suspense fallback={<div>Loading...</div>}>
+   
     
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-green-100 flex items-center justify-center py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-6 sm:space-y-8">
@@ -199,7 +199,7 @@ export default function LoginPage() {
         </div>
       </div>
     </div>
-    </Suspense>
+   
   );
 }
 
