@@ -2,14 +2,13 @@
 
 import { useState, useEffect } from "react";
 import { useAuthStore } from "@/store/authStore";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter,  } from "next/navigation";
 import Link from "next/link";
 import { Suspense } from "react";
 
 export default function LoginPage() {
   const { login, initiateGoogleLogin } = useAuthStore();
   const router = useRouter();
-  const searchParams = useSearchParams();
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
   const [error, setError] = useState("");
@@ -21,11 +20,15 @@ export default function LoginPage() {
 
   // Check for error in query params (from failed OAuth attempt)
   useEffect(() => {
-    const errorParam = searchParams.get("error");
+  if (typeof window !== "undefined") {
+    const params = new URLSearchParams(window.location.search);
+    const errorParam = params.get("error");
+
     if (errorParam) {
       setError(decodeURIComponent(errorParam));
     }
-  }, [searchParams]);
+  }
+}, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
