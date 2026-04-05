@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useAuthStore } from "@/store/authStore";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { Suspense } from "react";
 
 export default function LoginPage() {
   const { login, initiateGoogleLogin } = useAuthStore();
@@ -61,6 +62,8 @@ export default function LoginPage() {
   };
 
   return (
+      <Suspense fallback={<div>Loading...</div>}>
+    
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-green-100 flex items-center justify-center py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-6 sm:space-y-8">
         <div className="bg-white rounded-xl shadow-2xl p-5 sm:p-8">
@@ -193,5 +196,7 @@ export default function LoginPage() {
         </div>
       </div>
     </div>
+    </Suspense>
   );
 }
+

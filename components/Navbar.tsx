@@ -156,13 +156,6 @@ export default function Navbar() {
      
 
           <div className="lg:hidden flex items-center space-x-2 sm:space-x-3">
-                 {true && (
-  <Link href="/profile" className="text-white p-1.5">
-    <div className="w-7 h-7 rounded-full bg-gray-600 flex items-center justify-center text-xs font-bold uppercase">
-      {user?.name?.charAt(0) || "U"}
-    </div>
-  </Link>
-)}
             <button
               onClick={() => {
                 setIsSearchOpen(!isSearchOpen);
@@ -179,6 +172,7 @@ export default function Navbar() {
                 )}
               </svg>
             </button>
+            
 
             <Link href="/cart" className="relative p-1.5">
               <svg className="w-6 h-6 text-white hover:text-green-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -188,6 +182,14 @@ export default function Navbar() {
                 <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">{cartCount}</span>
               )}
             </Link>
+                          {true && (
+  <Link href="/profile" className="text-white p-1.5">
+    <div className="w-7 h-7 rounded-full bg-gray-600 flex items-center justify-center text-xs font-bold uppercase">
+      {user?.name?.charAt(0) || "U"}
+    </div>
+  </Link>
+)}
+   
 
             <button
               onClick={() => {
