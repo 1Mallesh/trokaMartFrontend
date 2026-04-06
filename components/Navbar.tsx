@@ -7,7 +7,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useRole } from "@/hooks/useRole";
 import { useCartStore } from "@/store/cartStore";
 import LoginModal from "./LoginModal";
-import logo from "@/app/(public)/assets/imges/logo3.png";
+import logo from "@/app/(public)/assets/imges/logo44.png";
 
 export default function Navbar() {
   const { user, logout, isAuthenticated } = useAuth();

@@ -71,7 +71,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight">
-              Welcome to <span className="text-green-200">TokoMart</span>
+              Welcome to <span className="text-green-200">NEXORA</span>
             </h1>
             <p className="text-base sm:text-xl lg:text-2xl mb-6 sm:mb-8 text-green-100 max-w-3xl mx-auto">
               Your ultimate shopping destination for fresh produce, quality products, and amazing deals
@@ -187,7 +187,7 @@ export default function Home() {
       {/* Why Choose Us */}
       <section className="py-12 sm:py-14 lg:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12 text-gray-800">Why Choose TrokaMart?</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12 text-gray-800">Why Choose NexOra?</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             <div className="text-center">
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">

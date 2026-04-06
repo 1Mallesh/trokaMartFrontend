@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import logo from "@/app/(public)/assets/imges/logo3.png";
+import logo from "@/app/(public)/assets/imges/logo44.png";
 
 
 export default function Footer() {
@@ -69,7 +69,7 @@ export default function Footer() {
 
         <div className="border-t border-gray-700 mt-8 pt-6 sm:pt-8 text-center">
           <p className="text-gray-300">
-            &copy; 2027 TrokaMart. All rights reserved. | Made with care for better shopping created by Mallesh
+            &copy; 2027 NEXORA All rights reserved. | Made with care for better shopping created by Mallesh
           </p>
         </div>
       </div>
